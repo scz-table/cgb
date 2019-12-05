@@ -1,0 +1,131 @@
+{% extends 'Base/base.html' %}
+{% block header %}
+{% endblock %}
+{% block body_base %}
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            line-height: 10px;
+        }
+    </style>
+    <table class="table-responsive" >
+        <tr>
+            <td>
+                {% with and_or_name='and_or1' and_or_id='id_and_or1' %}
+                    {% include 'Tips/search_and_or.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                {% with foritem_name='foritem1' foritem_id='id_foritem1' %}
+                    {% include 'Tips/supplier_select.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item1"id="item1" placeholder="请输入要筛选的数据！">
+            </td>
+            <td>
+                {% with and_or_name='and_or2' and_or_id='id_and_or2' %}
+                    {% include 'Tips/search_and_or.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                {% with foritem_name='foritem2' foritem_id='id_foritem2' %}
+                    {% include 'Tips/supplier_select.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item2"id="item2" placeholder="请输入要筛选的数据！">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% with and_or_name='and_or3' and_or_id='id_and_or3' %}
+                    {% include 'Tips/search_and_or.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                {% with foritem_name='foritem3' foritem_id='id_foritem3' %}
+                    {% include 'Tips/supplier_select.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item3"id="item3" placeholder="请输入要筛选的数据！">
+            </td>
+            <td>
+                {% with and_or_name='and_or4' and_or_id='id_and_or4' %}
+                    {% include 'Tips/search_and_or.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                {% with foritem_name='foritem4' foritem_id='id_foritem4' %}
+                    {% include 'Tips/supplier_select.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item4"id="item4" placeholder="请输入要筛选的数据！">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% with and_or_name='and_or5' and_or_id='id_and_or5' %}
+                    {% include 'Tips/search_and_or.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                {% with foritem_name='foritem5' foritem_id='id_foritem5' %}
+                    {% include 'Tips/supplier_select.html' %}
+                {% endwith %}
+            </td>
+            <td>
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item5" id="item5" placeholder="请输入要筛选的数据！">
+            </td>
+            <td>
+            </td>
+            <td>
+                <button onclick="search_for_supplier()" style="padding: 0px;height: 23px;font-size: 12px;width: 50px" type="button" class="btn btn-success">搜索</button>
+            </td>
+        </tr>
+    </table>
+    <script>
+        $("#id_and_or1").val("and-icontains");
+        $("#id_foritem1").val("supplierName");
+        $("#id_and_or2").val("and-icontains");
+        $("#id_foritem2").val("abbreviation");
+        $("#id_and_or3").val("and-icontains");
+        $("#id_foritem3").val("abbreviation");
+        $("#id_and_or4").val("and-icontains");
+        $("#id_foritem4").val("goodsType__goodsType");
+        $("#id_and_or5").val("and-icontains");
+        $("#id_foritem5").val("global");
+
+    function search_for_supplier(){
+        id_and_or1_value=$("#id_and_or1").val()+"-";
+        id_foritem1_value=$("#id_foritem1").val()+"-";
+        item1_value=$("#item1").val();
+        id_and_or2_value=$("#id_and_or2").val()+"-";
+        id_foritem2_value=$("#id_foritem2").val()+"-";
+        item2_value=$("#item2").val();
+        id_and_or3_value=$("#id_and_or3").val()+"-";
+        id_foritem3_value=$("#id_foritem3").val()+"-";
+        item3_value=$("#item3").val();
+        id_and_or4_value=$("#id_and_or4").val()+"-";
+        id_foritem4_value=$("#id_foritem4").val()+"-";
+        item4_value=$("#item4").val();
+        id_and_or5_value=$("#id_and_or5").val()+"-";
+        id_foritem5_value=$("#id_foritem5").val()+"-";
+        item5_value=$("#item5").val();
+        value1="value1="+id_and_or1_value+id_foritem1_value+item1_value;
+        value2="value2="+id_and_or2_value+id_foritem2_value+item2_value;
+        value3="value3="+id_and_or3_value+id_foritem3_value+item3_value;
+        value4="value4="+id_and_or4_value+id_foritem4_value+item4_value;
+        value5="value5="+id_and_or5_value+id_foritem5_value+item5_value;
+        new_url="?"+value1+"&"+value2+"&"+value3+"&"+value4+"&"+value5;
+        {#alert(window.parent.document.getElementById('Supplier_front_iframe_list'));#}
+        var supplier_list =$("#Supplier_front_iframe_list", parent.document);
+        supplier_list.attr('src',supplier_list.attr('src').split("?",1)+new_url);
+        console.log(supplier_list.attr('src'));
+
+    }
+    </script>
+{% endblock%}

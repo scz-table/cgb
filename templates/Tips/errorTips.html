@@ -1,0 +1,10 @@
+{% for check_login_error_key,check_login_error_value in check_login_errors.items %}
+    {% if check_login_error_key == errorKey %}
+        {% for check_login_error_tuple in check_login_error_value %}
+            <tr>
+                <td></td>
+                <td class="text-danger">{{ check_login_error_tuple.0 }}{{ check_login_error_tuple.1 }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+{% endfor %}

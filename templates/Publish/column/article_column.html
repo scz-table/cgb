@@ -1,0 +1,149 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{#onclick="add_column_button()"#}
+{% block body_base %}
+    <p class="text-right"><!--button class="btn btn-primary">add column</button-->
+        <button id= "add_column" onclick="add_column_button()" class="btn btn-primary"> add column</button>
+    </p>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tr>
+                <td>序号</td>
+                <td>文章分类</td>
+                <td>备注</td>
+                <td>操作</td>
+            </tr>
+            {% for column in columns %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ column.column }}</td>
+                <td>{{ column.notes }}</td>
+                <td>
+                    <a name="edit" href="javascript:" onclick="edit_column_button(this, {{ column.id }})">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a name="delete" href="javascript:" onclick="del_column_button(this, {{ column.id }})">
+                        <span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+                <tr><td colspan="3">还没有设置文章分类，太懒了。</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+{#<script type="text/javascript" src="{% static 'js/Publish/article_column.js'%}"></script>#}
+<script type="text/javascript">
+    function add_column_button(){
+        var index = layer.open({
+            type: 1,
+            skin: "layui-layer-rim",
+            area: ["400px", "260px"],
+            offset:"100px",
+            title: "新增文章分类",
+            content: '<div class="text-center" style="margin-top:20px">\
+                <p> 请输入新的文章分类名称</p>\
+                    <p><input type="text" name="column" maxlength="200" required="" id="id_column"></p>\
+                <p> 请输入新的文章分类的备注信息</p>\
+                    <p><input type="text" name="notes" id="id_notes"></p>\
+</div > ',
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                column_name = $('#id_column').val();
+                notes_name = $('#id_notes').val();
+                $.ajax({
+                    url: '{% url "publish:article-column" %}',
+                    type: 'POST',
+                    data: { "column": column_name,"notes": notes_name },
+                    success: function (e) {
+                        if (e == "1") {
+                            layer.msg('新增文章分类{' + column_name + '}成功！', {offset:'100px',});
+                            layer.close(index);
+                            setTimeout(function (){window.parent.document.getElementById('Article_column_front_iframe_list').contentWindow.location.reload()},800);
+                        } else if(e=="2"){
+                            layer.msg('此文章分类{' + column_name + '}已有，请更换名称。', {offset:'185px',})
+                        }else{
+                            layer.msg("新的文章分类{" + column_name + "}没有保存,修改失败。", {offset:'185px',})
+                        }
+                    },
+                });
+            },
+            btn2: function (index, layero) {
+                layer.close(index);
+            }
+        });
+    }
+
+    function edit_column_button(the, column_id){
+        var name = $(the).parents("tr").children("td").eq(1).text();
+        var notes = $(the).parents("tr").children("td").eq(2).text();
+        var index = layer.open({
+            type: 1,
+            skin: "layui-layer-rim",
+            area: ["400px", "260px"],
+            offset:"100px",
+            title: "文章分类文章分类",
+            content: '<div class="text-center" style="margin-top:20px"> ' +
+                '<p>请编辑的文章分类名称</p><p><input type="text" id="new_name" value="'+name+'"></p>' +
+                '<p>请编辑的文章分的类备注信息</p><p><input type="text" id="new_notes" value="'+notes+'"></p>' +
+                ' </div>',
+            btn:['确定', '取消'],
+            yes: function(index, layero){
+                new_name = $("#new_name").val();
+                new_notes = $("#new_notes").val();
+                $.ajax({
+                    url: "{% url 'publish:rename_article_column' %}",
+                    type: "POST",
+                    data: {"column_id": column_id, "column": new_name, "notes": new_notes},
+                    success: function(e){
+                        if(e=="1"){
+                            layer.msg("修改后的文章分类内容{" + new_name + "},{" + new_notes + "}已被修改。", {offset:'185px',});
+                            layer.close(index);
+                            setTimeout(function (){window.parent.document.getElementById('Article_column_front_iframe_list').contentWindow.location.reload()},800);
+                        }else if(e=="2"){
+                            layer.msg("修改后的文章分类内容{" + new_name + "}已存在,修改失败。", {offset:'185px',})
+                        }else if(e=="0"){
+                            layer.msg("修改后的文章分类内容{" + new_name + "},{" + new_notes + "}在保存过程中出错,修改失败。", {offset:'185px',})
+                        }else if(e=="3"){
+                            layer.msg("修改后的文章分类内容{" + new_name + "},{" + new_notes + "}格式或者内容错误,修改失败。", {offset:'185px',})
+                        }else{
+                            layer.msg("修改后的文章分类内容{" + new_name + "},{" + new_notes + "}没有保存,修改失败。", {offset:'185px',})
+                        }
+                    },
+                });
+            },
+        });
+    }
+
+    function del_column_button(the, column_id){
+        var name = $(the).parents("tr").children("td").eq(1).text();
+        var notes = $(the).parents("tr").children("td").eq(2).text();
+        layer.open({
+            type: 1,
+            skin: "layui-layer-rim",
+            area: ["400px", "190px"],
+            offset:"100px",
+            title: "删除文章分类",
+            content: '<div class="text-center" style="margin-top:20px"><p>是否确定删除{'+name+'}文章分类</p><p>是否确定删除{'+notes+'}</p> </div>',
+            btn:['确定', '取消'], yes: function(index, layero){
+                $.ajax({
+                    url: '{% url "publish:del_article_column" %}',
+                    type:"POST",
+                    data: {"column_id":column_id},
+                    success: function(e){
+                        if(e=="1"){
+                            layer.msg("文章分类{" + name + "}已被删除。", {offset:'185px',});
+                            layer.close(index);
+                            setTimeout(function (){window.parent.document.getElementById('Article_column_front_iframe_list').contentWindow.location.reload()},800);
+                        }else{
+                            layer.msg("文章分类{" + name + "}删除失败");
+                        }
+                    },
+                })
+            },
+        });
+    }
+</script>
+
+{% endblock%}

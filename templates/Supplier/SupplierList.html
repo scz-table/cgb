@@ -1,0 +1,78 @@
+{% extends 'Base/base.html' %}
+
+{% block body_base %}
+<dev class="table-responsive" style="height:580px;">
+        <table class="table table-hover table-bordered table-striped table-condensed text-nowrap text-center table-responsive"  style="word-break:break-all;font-size: 12px">
+            <tr>
+                {% for th_name in table_th_name %}
+                    <th style="text-align:center;padding: 1px;">{{ th_name }}</th>
+                {% endfor %}
+
+            </tr>
+            <tr>
+                {% for supplier_lab in Supplier %}
+                    <td style="padding: 1px;">{{ supplier_lab.id }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.grade }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.code }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.supplierName }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.bankName }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.accountNumber }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.bankNunber }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.dutyParagraph }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.Note }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.state }}</td>
+                    <td style="padding: 1px;">
+                    {% for type in supplier_lab.goodsType.all %}
+                            {{ type }},
+                    {% endfor %}
+                    </td>
+                    <td style="padding: 1px;">{{ supplier_lab.abbreviation }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.industryStatus }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.entrustName }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.entrustTelephone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.entrustAddress }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.entrustZipCode }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.entrustPhone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.entrustFax }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.entrustEmail }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.registeredAddress }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.legalName }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.legalTelephone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.legalPhone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact1Name }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact1Post }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact1Telephone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact1Phone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact1Email }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact2Name }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact2Post }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact2Telephone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact2Phone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact2Email }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact3Name }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact3Post }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact3Telephone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact3Phone }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.contact3Email }}</td>
+                    <td style="padding: 1px;">
+                    {% for type in supplier_lab.Planner.all %}
+                            {{ type }},
+                    {% endfor %}
+                    </td>
+                    <td style="padding: 1px;">{{ supplier_lab.goodsTypeName }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.riskLevel }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.riskStatement }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.lastEditName }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.createName}}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.create_time|date:"Y-m-g" }}</td>
+                    <td style="padding: 1px;">{{ supplier_lab.change_time|date:"Y-m-g" }}</td>
+
+                {% endfor %}
+            </tr>
+        </table>
+
+    {% with url_file='supplier:SupplierListView' %}
+        {% include 'Tips/paginator.html' %}
+    {% endwith %}
+</dev>
+{% endblock%}

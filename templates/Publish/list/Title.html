@@ -1,0 +1,30 @@
+{% extends 'Base/base.html' %}
+
+{% block body_base %}
+<div class="container" style="width:100%;margin: 0px;padding: 0px;">
+<dev class="table-responsive" style="width:100%;margin: 0px;padding: 0px;">
+    <div class="row text-center vertical-middle-sm" style="width:100%;margin: 0px;padding: 0px;">
+        <h3>最新通知</h3>
+    </div>
+    <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
+        <div class="col-xs-12 col-md-1">
+        </div>
+        <div class="col-xs-12 col-md-10">
+            {% for publish_item in publish_list %}
+                <div class="list-group">
+                    <a class="list-group-item active" target="_blank" href="{% url 'publish:article' article_id=publish_item.id  %}">
+                        <h4 class="list-group-item-heading">标题：{{ publish_item.title|truncatechars_html:50 }}</h4>
+                    <p  class="list-group-item-text"><span>作者: {{ publish_item.author }} </span></p>
+                    <p  class="list-group-item-text"><span>发布时间 {{ publish_item.create_time }} </span> <span>更新时间 {{ publish_item.change_time }} </span></p>
+                    <p class="list-group-item-text">概要：{{ publish_item.body|truncatechars_html:200 }} </p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-xs-12 col-md-1">
+        </div>
+
+    </div>
+</dev>
+</div>
+{% endblock%}

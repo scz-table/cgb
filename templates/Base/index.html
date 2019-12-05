@@ -1,0 +1,137 @@
+{% extends 'Base/base.html' %}
+{% block leftsidebar %}
+{% include 'Base/leftsidebar.html' %}
+{% endblock %}
+{% block contain %}
+<div class="col-md-11" style="padding:0px 5px 0px 0px;">
+    <div class="container container_top " style="padding: 0px;">
+        {% block lbody %}
+
+            <ul id="front_table_name" class="nav nav-tabs">
+               <li id="home_lable_li" class="active"><a href="#home" data-toggle="tab" onclick="flash_list('#Publish_iframe','#home_lable_li','#home');">首页</a></li>
+            </ul>
+            <div id="front_table_content_name" class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <iframe id="Publish_iframe" src="{% url 'publish:title' %}" frameborder="0" width="100%" height="900px"></iframe>
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $(window).resize(function(){
+           $("#base_head_navbar_div").height($("#base_head_navbar").height());
+        });
+      $("#Supplier_front").click(function(){
+          id="Supplier_front";
+          table_name="供应商信息";//" + table_name + "
+          iframe_search_url= "{% url 'supplier:SupplierSearchView' %}";//" + iframe_search_url + "
+          iframe_list_url=  "{% url 'supplier:SupplierListView' %}";//" + iframe_list_url + "
+          iframe_search_list(id,table_name,iframe_search_url,iframe_list_url);
+      });
+
+      $("#Article_column_front").click(function(){
+          id="Article_column_front";
+          table_name="文章分类";//" + table_name + "
+          iframe_search_url= "{% url 'publish:article-column' %}";//" + iframe_search_url + "
+          iframe_list_url=  "{% url 'publish:article-column' %}";//" + iframe_list_url + "
+          iframe_search_list(id,table_name,iframe_search_url,iframe_list_url);
+      });
+
+      $("#Article_list_front").click(function(){
+          id="Article_list_front";
+          table_name="文章列表";//" + table_name + "
+          iframe_search_url= "{% url 'publish:article_list' %}";//" + iframe_search_url + "
+          iframe_list_url=  "{% url 'publish:article_list' %}";//" + iframe_list_url + "
+          iframe_search_list(id,table_name,iframe_search_url,iframe_list_url);
+      });
+
+      $("#Article_publish_front").click(function(){
+          id="Article_publish_front";
+          table_name="发布文章";//" + table_name + "
+          iframe_full_url=  "{% url 'publish:article_post' %}";//" + iframe_list_url + "
+          iframe_view_list(id,table_name,iframe_full_url);
+      });
+    });
+    function flash_list(iframe_full_name_get,table_name_li_get,iframe_name_get){
+        show_table_iframe(table_name_li_get,iframe_name_get);
+        $(iframe_full_name_get).attr('src', $(iframe_full_name_get).attr('src'));
+    }
+    function iframe_view_list(id,table_name,iframe_full_url){
+      table_name_li= id + "_lable_li";//" + table_name_li + "
+      table_name_li_get="#"+table_name_li;//" + table_name_li_get + "
+      table_name_a= id + "_lable";//" + table_name_a + "
+      table_name_a_get="#"+table_name_a;//" + table_name_a_get + "
+      iframe_name= id + "_iframe";//" + iframe_name + "
+      iframe_name_get="#"+iframe_name;//" + iframe_name_get + "
+      iframe_full_name= id + "_iframe_full";//" + iframe_full_name + "
+      iframe_full_width= "100%";//" + iframe_full_width + "
+      iframe_full_height= "900px";//" + iframe_full_height + "
+      iframe_full_name_get="#"+iframe_full_name;//" + iframe_full_name_get + "
+      if($(table_name_li_get)[0]){
+          show_table_iframe(table_name_li_get,iframe_name_get);
+            flash_list(iframe_full_name_get,table_name_li_get,iframe_name_get);
+          } else {
+          var table_name="<li id=\"" + table_name_li + "\"><a href=\"//" + iframe_name_get + "\" data-toggle=\"tab\" id=\"" + table_name_a + "\">" + table_name + "<span style=\"font-size:small;\" onclick=\"remove_table_iframe(" + table_name_li + "," + iframe_name + ")\" class=\"close\">&times;</span></a></li>";
+          $("#front_table_name").append(table_name);
+
+          var table_iframe_name="<div class=\"tab-pane\" id=\"" + iframe_name + "\"></div>";
+          $("#front_table_content_name").append(table_iframe_name);
+          var iframe_full_name_add="<iframe id=\"" + iframe_full_name + "\" src=\"" + iframe_full_url + "\" frameborder=\"0\" width=\"" + iframe_full_width + "\" height=\"" + iframe_full_height + "\"></iframe>";
+          $(iframe_name_get).append(iframe_full_name_add);
+          show_table_iframe(table_name_li_get,iframe_name_get);
+        }
+    }
+    function iframe_search_list(id,table_name,iframe_search_url,iframe_list_url){
+      table_name_li= id + "_lable_li";//" + table_name_li + "
+      table_name_li_get="#"+table_name_li;//" + table_name_li_get + "
+      table_name_a= id + "_lable";//" + table_name_a + "
+      table_name_a_get="#"+table_name_a;//" + table_name_a_get + "
+      iframe_name= id + "_iframe";//" + iframe_name + "
+      iframe_name_get="#"+iframe_name;//" + iframe_name_get + "
+      iframe_search_name= id + "_iframe_search";//" + iframe_search_name + "
+      iframe_search_width= "100%";//" + iframe_search_width + "
+      iframe_search_height= "70px";//" + iframe_search_height + "
+      iframe_search_name_get="#"+iframe_search_name;//" + iframe_search_name_get + "
+      iframe_list_name= id + "_iframe_list";//" + iframe_list_name + "
+      iframe_list_width= "100%";//" + iframe_list_width + "
+      iframe_list_height= "830px";//" + iframe_list_height + "
+      iframe_list_name_get="#"+iframe_list_name;//" + iframe_list_name_get + "
+      if($(table_name_li_get)[0]){
+            flash_list(iframe_list_name_get,table_name_li_get,iframe_name_get);
+          } else {
+          var table_name="<li id=\"" + table_name_li + "\"><a href=\"//" + iframe_name_get + "\" data-toggle=\"tab\" id=\"" + table_name_a + "\">" + table_name + "<span style=\"font-size:small;\" onclick=\"remove_table_iframe(" + table_name_li + "," + iframe_name + ")\" class=\"close\">&times;</span></a></li>";
+          $("#front_table_name").append(table_name);
+
+          var table_iframe_name="<div class=\"tab-pane\" id=\"" + iframe_name + "\"></div>";
+          $("#front_table_content_name").append(table_iframe_name);
+          var iframe_search_name_add="<iframe id=\"" + iframe_search_name + "\" src=\"" + iframe_search_url + "\" frameborder=\"0\" width=\"" + iframe_search_width + "\" height=\"" + iframe_search_height + "\"></iframe>";
+          var iframe_list_name_add="<iframe id=\"" + iframe_list_name + "\" src=\"" + iframe_list_url + "\" frameborder=\"0\" width=\"" + iframe_list_width + "\" height=\"" + iframe_list_height + "\"></iframe>";
+          $(iframe_name_get).append(iframe_search_name_add,iframe_list_name_add);
+          show_table_iframe(table_name_li_get,iframe_name_get);
+        }
+    }
+    function show_table_iframe(table_lable,table_iframe){
+          $(table_lable).addClass("active");
+          $("#front_table_name").children("li").not($(table_lable)).removeClass("active");
+          $("#front_table_content_name").children("div").removeClass("active");
+          $(table_iframe).addClass("active");
+          {#$("#front_table_content_name").children("div").not($(table_iframe)).removeClass("active");#}
+    }
+    //remove_table_iframe('#Supplier_front_lable_li','#Supplier_front_iframe');
+    function remove_table_iframe(table_lable,table_iframe){
+        if ($(table_lable).hasClass("active")){
+
+            $(table_lable).siblings().removeClass("active");
+              $(table_iframe).siblings().removeClass("active");
+
+              $(table_lable).prev().addClass("active");
+              $(table_iframe).prev().addClass("active");
+        }
+          $(table_lable).remove();
+          $(table_iframe).remove();
+    }
+
+    </script>
+{% endblock %}

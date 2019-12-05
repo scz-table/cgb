@@ -1,0 +1,8 @@
+signin_url='Front/signin.html'
+signup_url='Front/signup.html'
+change_password_url='Front/change_password.html'
+reset_password_url='Front/reset_password.html'
+user_Show_url='Front/user_Show.html'
+user_Edit_url='Front/user_Edit.html'
+supplier_list_url='Supplier/SupplierList.html'
+supplier_Search_url='Supplier/SupplierSearch.html'

@@ -1,0 +1,22 @@
+{% extends 'Front/../Front/../Base/head.html' %}
+
+{% block contain %}
+    <dev class="table-responsive">
+        <table class="table table-hover table-bordered table-striped table-condensed text-center">
+            <thead>
+                    {% for count in table_count %}
+                        <td>{{ count|add:'1' }} </td>
+                    {% endfor %}
+            </thead>
+            <tbody>
+                {% for foo in table_count %}
+                    <tr style="text-align:center">
+                        {% for count in table_count %}
+                            <td>{{ count|add:'1' }} </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </dev>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'Base/head.html' %}
+
+    <title>
+        {% block title %}
+            战略采购部
+        {% endblock %}
+    </title>
+
+    <style>
+
+    *{
+        padding: 0px;
+        margin: 0px;
+    }
+    .container_top{
+        width: 100%;
+        }
+
+    #front_table_name a{
+        padding:5px 2px;
+        margin-right:2px;
+        {#border: 1px solid #b9def0;#}
+    }
+
+    #front_table_content_name{
+        padding:5px 2px;
+        margin-right:2px;
+        border: 1px solid #b9def0;
+    }
+
+    .navbar-fixed-top li > a,.navbar-fixed-top div > a,.navbar-fixed-top button > a{
+        padding:9px;
+
+    }
+    </style>
+
+</head>
+<body>
+<div class="container" style="width:100%;margin: 0px;padding: 0px;">
+    {% block body_base %}
+
+        {% block header %}
+            {% include 'Base/header.html' %}
+        {% endblock %}
+
+        {% block body_extern %}
+            <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
+                {% block leftsidebar %}
+
+                {% endblock %}
+
+                {% block contain %}
+
+                {% endblock %}
+
+                {% block rightsidebar %}
+
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block footer %}
+            {% include 'Base/footer.html' %}
+        {% endblock %}
+    {% endblock %}
+</div>
+</body>
+</html>

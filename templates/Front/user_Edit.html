@@ -1,0 +1,110 @@
+{% extends 'Front/../Base/index.html' %}
+
+{% block lbody %}
+{# <div class="signup-body" style="margin:0 auto;width: 500px;">#}
+        <form class="form-horizontal" action="" method="post">
+           <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+{#        {% csrf_token %}#}
+          <h2 class="page-header text-center" style="width: 100%">修改用户信息页面</h2>
+          <table class="form-group" style="margin: 0 auto">
+{#                  <tr><td class="text-center" style="font-size:20px;color:red" colspan="3"><strong>修改用户信息页面</strong></td></tr>#}
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">用户名</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="" disabled>{{ front_user.username }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.fullname.id_for_label }}">{{ obj.fullname.label }}</label></td>
+                      <td>{{ obj.fullname }}</td>
+                      <td><label class="control-label" for="{{ obj.fullname.id_for_label }}">{{ obj.fullname.errors.0 }}</label></td>
+                  </tr>
+    {#          检测fullname错误#}
+                {% with 'fullname' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.email.id_for_label }}">{{ obj.email.label }}</label></td>
+                      <td>{{ obj.email }}</td>
+                      <td><label class="control-label" for="{{ obj.email.id_for_label }}">{{ obj.email.errors.0 }}</label></td>
+                  </tr>
+    {#          检测email错误#}
+                {% with 'email' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">部门</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="" disabled>{{ department }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">职位</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="" disabled>{{ position }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.telephone.id_for_label }}">{{ obj.telephone.label }}</label></td>
+                      <td>{{ obj.telephone }}</td>
+                      <td><label class="control-label" for="{{ obj.telephone.id_for_label }}">{{ obj.telephone.errors.0 }}</label></td>
+                  </tr>
+    {#          检测telephone错误#}
+                {% with 'telephone' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.phone.id_for_label }}">{{ obj.phone.label }}</label></td>
+                      <td>{{ obj.phone }}</td>
+                      <td><label class="control-label" for="{{ obj.phone.id_for_label }}">{{ obj.phone.errors.0 }}</label></td>
+                  </tr>
+    {#          检测phone错误#}
+                {% with 'phone' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.school.id_for_label }}">{{ obj.school.label }}</label></td>
+                      <td>{{ obj.school }}</td>
+                      <td><label class="control-label" for="{{ obj.school.id_for_label }}">{{ obj.school.errors.0 }}</label></td>
+                  </tr>
+    {#          检测school错误#}
+                {% with 'school' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.profession.id_for_label }}">{{ obj.profession.label }}</label></td>
+                      <td>{{ obj.profession }}</td>
+                      <td><label class="control-label" for="{{ obj.profession.id_for_label }}">{{ obj.profession.errors.0 }}</label></td>
+                  </tr>
+    {#          检测school错误#}
+                {% with 'profession' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.address.id_for_label }}">{{ obj.address.label }}</label></td>
+                      <td>{{ obj.address }}</td>
+                      <td><label class="control-label" for="{{ obj.address.id_for_label }}">{{ obj.address.errors.0 }}</label></td>
+                  </tr>
+    {#          检测school错误#}
+                {% with 'address' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.aboutme.id_for_label }}">{{ obj.aboutme.label }}</label></td>
+                      <td>{{ obj.aboutme }}</td>
+                      <td><label class="control-label" for="{{ obj.aboutme.id_for_label }}">{{ obj.aboutme.errors.0 }}</label></td>
+                  </tr>
+    {#          检测school错误#}
+                {% with 'aboutme' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+
+                 <tr>
+                      <td></td>
+                      <td>
+                          <button type="submit" class="btn btn-default">确认修改</button>
+                          <button type="reset" class="btn btn-default">重新输入</button>
+                          <a href="{% url 'front:user_Show_Information' %}" class="btn btn-default">取消修改</a>
+                      </td>
+                  </tr>
+
+          </table>
+        </form>
+{#</div>#}
+
+
+{% endblock %}

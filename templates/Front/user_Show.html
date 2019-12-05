@@ -1,0 +1,102 @@
+{% extends 'Front/../Base/index.html' %}
+
+{% block lbody %}
+{# <div class="signup-body" style="margin:0 auto;width: 500px;">#}
+{#        <form class="form-horizontal" action="" method="post">#}
+           <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+{#        {% csrf_token %}#}
+        <h2 class="page-header text-center" style="width: 100%">用户信息页面</h2>
+    <div class="row">
+        {% load static %}
+        <div class="col-xs-12 col-md-2 text-center">
+        </div>
+        <div class="col-xs-12 col-md-2 text-center">
+            <div>
+                {% if front_user_extension.photo %}
+                    <img src="{{ front_user_extension.photo | striptags }}" name="user_face" class="img-thumbnail text-center" width="200px" id="my_photh" alt="">
+                {% else %}
+                    <img src="{% static 'images/newton.jpg'%}" name="user_face" class="img-thumbnail text-center" width="200px" id="my_photh" alt="">
+                {% endif %}
+            </div>
+            <div>
+                <button class="btn btn-primary" id="upload_image" onclick="upload_image_layer()">
+                    修改头像
+                </button>
+            </div>
+            <br>
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <table class="form-group" style="margin: 0 auto">
+{#                  <tr><td class="text-center" style="font-size:20px;color:red" colspan="3"><strong>用户信息页面</strong></td></tr>#}
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">用户名</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user.username }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">姓名</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user_extension.fullname }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">部门</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ department }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">职位</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ position }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">邮箱</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user.email }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">手机</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user_extension.telephone }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">座机</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user_extension.phone }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">学校</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user_extension.school }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">专业</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user_extension.profession }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">居住住址</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user_extension.address }}</label></td>
+                  </tr>
+                  <tr>
+                      <td><label style="margin: 0 auto" class="control-label" for="">自我介绍</label></td>
+                      <td><label style="margin: 0 auto" class="form-control" for="">{{ front_user_extension.aboutme }}</label></td>
+                  </tr>
+
+
+                      <td></td>
+                      <td>
+                          <a href="{% url 'front:user_Edit_Information' %}" class="btn btn-default">修改用户信息</a>
+                      </td>
+                  </tr>
+
+          </table>
+        </div>
+    </div>
+{#        </form>#}
+{#</div>#}
+
+<script type="text/javascript" src='{% static "bootstrap-3.3.7/dist/js/jquery-3.4.1.min.js" %}'></script>
+<script type="text/javascript" src="{% static 'js/layer.js'%}"></script>
+<script>
+function upload_image_layer(){
+    layer.open({
+        title:"上传头像",
+        area: ['650px', '600px'],
+        type:2,
+        content:"{% url 'front:my_image' %}",
+    });
+}
+</script>
+
+{% endblock %}

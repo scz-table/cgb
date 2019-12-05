@@ -1,0 +1,90 @@
+{% extends 'Front/../Base/index.html' %}
+
+{% block lbody %}
+{# <div class="signup-body" style="margin:0 auto;width: 500px;">#}
+        <form class="form-horizontal" action="" method="post">
+           <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+{#        {% csrf_token %}#}
+          <h2 class="page-header text-center" style="width: 100%">战略采购部</h2>
+          <table class="form-group" style="margin: 0 auto">
+                <tr><td colspan="2" align="center"><h4 class="text-danger"><strong>注册页面</strong></h4></td></tr>
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.username.id_for_label }}">{{ obj.username.label }}</label></td>
+                      <td>{{ obj.username }}</td>
+                      <td><label class="control-label" for="{{ obj.username.id_for_label }}">{{ obj.username.errors.0 }}</label></td>
+                  </tr>
+                {% with 'username' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj2.fullname.id_for_label }}">{{ obj2.fullname.label }}</label></td>
+                      <td>{{ obj2.fullname }}</td>
+                      <td><label class="control-label" for="{{ obj2.fullname.id_for_label }}">{{ obj2.fullname.errors.0 }}</label></td>
+                  </tr>
+    {#          检测用户名错误#}
+                {% with 'fullname' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.email.id_for_label }}">{{ obj.email.label }}</label></td>
+                      <td>{{ obj.email }}</td>
+                      <td><label class="control-label" for="{{ obj.email.id_for_label }}">{{ obj.email.errors.0 }}</label></td>
+                  </tr>
+    {#          检测email错误#}
+                {% with 'email' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj2.telephone.id_for_label }}">{{ obj2.telephone.label }}</label></td>
+                      <td>{{ obj2.telephone }}</td>
+                      <td><label class="control-label" for="{{ obj2.telephone.id_for_label }}">{{ obj2.telephone.errors.0 }}</label></td>
+                  </tr>
+    {#          检测手机号错误#}
+                {% with 'telephone' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj2.phone.id_for_label }}">{{ obj2.phone.label }}</label></td>
+                      <td>{{ obj2.phone }}</td>
+                      <td><label class="control-label" for="{{ obj2.phone.id_for_label }}">{{ obj2.phone.errors.0 }}</label></td>
+                  </tr>
+    {#          检测座机号错误#}
+                {% with 'phone' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.password.id_for_label }}">{{ obj.password.label }}</label></td>
+                      <td>{{ obj.password }}</td>
+                      <td><label class="control-label" for="{{ obj.password.id_for_label }}">{{ obj.password.errors.0 }}</label></td>
+                  </tr>
+
+    {#          检测密码错误#}
+                {% with 'password' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td><label class="control-label" for="{{ obj.password_repeated.id_for_label }}">{{ obj.password_repeated.label }}</label></td>
+                      <td>{{ obj.password_repeated }}</td>
+                      <td><label class="control-label" for="{{ obj.password_repeated.id_for_label }}">{{ obj.password_repeated.errors.0 }}</label></td>
+                  </tr>
+    {#          检测确认密码错误#}
+                {% with 'password_repeated' as errorKey %}
+                    {% include 'Tips/errorTips.html' %}
+                {% endwith %}
+                  <tr>
+                      <td></td>
+                      <td>
+                          <button type="submit" class="btn btn-default">注册</button>
+                          <button type="reset" class="btn btn-default">重新输入</button>
+                      </td>
+                  </tr>
+                    <tr>
+                        <input type="hidden" name="date_joined" value="{{ date }}">
+                    </tr>
+
+          </table>
+        </form>
+{#</div>#}
+
+
+{% endblock %}
