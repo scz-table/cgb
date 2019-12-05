@@ -32,6 +32,7 @@ def get_pagination_data_ListView(page_obj, paginator, around_count=5):
         'num_pages': num_pages,
         'left_more_page': left_more_page,
         'right_more_page': right_more_page,
+        'around_count': around_count,
     }
 
 def get_pagination_data(page,list_name,paginator,around_count=5):
@@ -61,7 +62,6 @@ def get_pagination_data(page,list_name,paginator,around_count=5):
         right_has_more = True
         right_more_page = current_page + around_count + 1
         right_pages = range(current_page + 1, current_page + around_count + 1)
-
     return {
                         list_name: page_obj.object_list,
                         "page_obj": page_obj,
@@ -73,4 +73,5 @@ def get_pagination_data(page,list_name,paginator,around_count=5):
                         'num_pages': num_pages,
                         'left_more_page': left_more_page,
                         'right_more_page': right_more_page,
+                        'around_count': around_count,
                   }

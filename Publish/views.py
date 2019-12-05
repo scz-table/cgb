@@ -27,8 +27,11 @@ def ArticleView(request,article_id):
 def Article_Column(request):
     if request.method == "GET":
         columns = ArticleColumn.objects.filter(author=request.user.extension)
-        column_form = ArticleColumnForm()
-        return render(request, "Publish/column/article_column.html", {"columns": columns})
+        around_count = 5
+        paginator = Paginator(columns, around_count)
+        page = request.GET.get('page')
+        # column_form = ArticleColumnForm()
+        return render(request, "Publish/column/article_column.html", get_pagination_data(page,'columns', paginator, around_count))
 
     if request.method == "POST":
         column_name = request.POST.get('column')

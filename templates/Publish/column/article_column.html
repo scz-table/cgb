@@ -3,9 +3,11 @@
 
 {#onclick="add_column_button()"#}
 {% block body_base %}
+    {% with url_file='publish:article_list' %}
     <p class="text-right"><!--button class="btn btn-primary">add column</button-->
         <button id= "add_column" onclick="add_column_button()" class="btn btn-primary"> add column</button>
     </p>
+            {% include 'Tips/paginator.html' %}
     <div class="table-responsive">
         <table class="table table-hover">
             <tr>
@@ -33,6 +35,8 @@
             {% endfor %}
         </table>
     </div>
+            {% include 'Tips/paginator.html' %}
+    {% endwith %}
 {#<script type="text/javascript" src="{% static 'js/Publish/article_column.js'%}"></script>#}
 <script type="text/javascript">
     function add_column_button(){
