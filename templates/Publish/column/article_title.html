@@ -1,0 +1,43 @@
+{% extends 'Base/base.html' %}
+
+{% block body_base %}
+<div class="container" style="width:100%;margin: 0px;padding: 0px;">
+<div class="table-responsive" style="width:100%;margin: 0px;padding: 0px;">
+    {% with url_file='publish:title' %}
+        <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
+            <div class="col-xs-12 col-md-1">
+            </div>
+            <div class="col-xs-12 col-md-10">
+                {% include 'Tips/paginator.html' %}
+            </div>
+        </div>
+        <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
+            <div class="col-xs-12 col-md-1">
+            </div>
+            <div class="col-xs-12 col-md-10">
+                {% for article in articles %}
+                    <div class="list-group">
+                        <a class="list-group-item active" target="_blank" href="{{ article.get_absolute_url }}">
+                            <h4 class="list-group-item-heading">标题：{{ article.title|truncatechars_html:50 }}</h4>
+                        <p  class="list-group-item-text"><span>作者: {{ article.author }} </span></p>
+                        <p  class="list-group-item-text"><span>发布时间 {{ article.create_time }} </span> <span>更新时间 {{ article.change_time }} </span></p>
+                        <p class="list-group-item-text">概要：{{ article.body|truncatechars_html:200 }} </p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-xs-12 col-md-1">
+            </div>
+        </div>
+
+        <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
+            <div class="col-xs-12 col-md-1">
+            </div>
+            <div class="col-xs-12 col-md-10">
+                {% include 'Tips/paginator.html' %}
+            </div>
+        </div>
+    {% endwith %}
+</div>
+</div>
+{% endblock%}

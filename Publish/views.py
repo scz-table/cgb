@@ -9,25 +9,20 @@ from django.core.paginator import Paginator
 from Universalscript.get_paginator import get_pagination_data
 import json
 
-def Publish(request):
-    pass
-
 @require_GET
 def TitleView(request):
-    publish_list=PublishArticle.objects.all()
-    return render(request, "Publish/list/Title.html", {"publish_list":publish_list})
-
-@require_GET
-def ArticleView(request,article_id):
-    publish=PublishArticle.objects.get(id=article_id)
-    return render(request,"Publish/Article.html",{"publish":publish})
+    articles_list = PublishArticle.objects.all()
+    around_count = 10
+    paginator = Paginator(articles_list, around_count)
+    page = request.GET.get('page')
+    return render(request, "Publish/column/article_title.html",get_pagination_data(page,'articles', paginator, around_count))
 
 @login_required
 @csrf_exempt
 def Article_Column(request):
     if request.method == "GET":
         columns = ArticleColumn.objects.filter(author=request.user.extension)
-        around_count = 5
+        around_count = 10
         paginator = Paginator(columns, around_count)
         page = request.GET.get('page')
         # column_form = ArticleColumnForm()
@@ -132,7 +127,7 @@ def article_post(request):
 @require_GET
 def article_list(request):
     articles_list = PublishArticle.objects.filter(author=request.user.extension)
-    around_count = 5
+    around_count = 10
     paginator = Paginator(articles_list, around_count)
     page = request.GET.get('page')
     return render(request, "Publish/column/article_list.html",get_pagination_data(page,'articles', paginator, around_count))

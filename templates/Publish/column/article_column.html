@@ -3,40 +3,67 @@
 
 {#onclick="add_column_button()"#}
 {% block body_base %}
+<div class="container" style="width:100%;margin: 0px;padding: 0px;">
+<div class="table-responsive" style="width:100%;margin: 0px;padding: 0px;">
     {% with url_file='publish:article_list' %}
     <p class="text-right"><!--button class="btn btn-primary">add column</button-->
         <button id= "add_column" onclick="add_column_button()" class="btn btn-primary"> add column</button>
     </p>
-            {% include 'Tips/paginator.html' %}
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <tr>
-                <td>序号</td>
-                <td>文章分类</td>
-                <td>备注</td>
-                <td>操作</td>
-            </tr>
-            {% for column in columns %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ column.column }}</td>
-                <td>{{ column.notes }}</td>
-                <td>
-                    <a name="edit" href="javascript:" onclick="edit_column_button(this, {{ column.id }})">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                    <a name="delete" href="javascript:" onclick="del_column_button(this, {{ column.id }})">
-                        <span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span>
-                    </a>
-                </td>
-            </tr>
-            {% empty %}
-                <tr><td colspan="3">还没有设置文章分类，太懒了。</td></tr>
-            {% endfor %}
-        </table>
-    </div>
-            {% include 'Tips/paginator.html' %}
+        <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
+            <div class="col-xs-12 col-md-1">
+            </div>
+            <div class="col-xs-12 col-md-9">
+                {% include 'Tips/paginator.html' %}
+            </div>
+            <div class="col-xs-12 col-md-2">
+                <button id= "add_column" onclick="add_column_button()" class="btn btn-primary"> add column</button>
+            </div>
+        </div>
+        <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
+            <div class="col-xs-12 col-md-1">
+            </div>
+            <div class="col-xs-12 col-md-10">
+                    <table class="table table-hover">
+                        <tr>
+                            <td>序号</td>
+                            <td>文章分类</td>
+                            <td>备注</td>
+                            <td>操作</td>
+                        </tr>
+                        {% for column in columns %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ column.column }}</td>
+                            <td>{{ column.notes }}</td>
+                            <td>
+                                <a name="edit" href="javascript:" onclick="edit_column_button(this, {{ column.id }})">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <a name="delete" href="javascript:" onclick="del_column_button(this, {{ column.id }})">
+                                    <span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                            <tr><td colspan="3">还没有设置文章分类，太懒了。</td></tr>
+                        {% endfor %}
+                    </table>
+            </div>
+            <div class="col-xs-12 col-md-1">
+            </div>
+        <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
+            <div class="col-xs-12 col-md-1">
+            </div>
+            <div class="col-xs-12 col-md-9">
+                {% include 'Tips/paginator.html' %}
+            </div>
+            <div class="col-xs-12 col-md-2">
+                <button id= "add_column" onclick="add_column_button()" class="btn btn-primary"> add column</button>
+            </div>
+        </div>
     {% endwith %}
+</div>
+</div>
 {#<script type="text/javascript" src="{% static 'js/Publish/article_column.js'%}"></script>#}
 <script type="text/javascript">
     function add_column_button(){
