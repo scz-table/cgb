@@ -5,16 +5,16 @@
 <div class="table-responsive" style="width:100%;margin: 0px;padding: 0px;">
     {% with url_file='publish:title' %}
         <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
-            <div class="col-xs-12 col-md-1">
+            <div class="col-xs-12 col-md-1" style="margin: 0px;padding: 0px;">
             </div>
-            <div class="col-xs-12 col-md-10">
+            <div class="col-xs-12 col-md-10" style="margin: 0px;padding: 0px;">
                 {% include 'Tips/paginator.html' %}
             </div>
         </div>
         <div class="row"  style="width:100%;margin: 0px;padding: 0px;">
-            <div class="col-xs-12 col-md-1">
+            <div class="col-xs-12 col-md-1" style="margin: 0px;padding: 0px;">
             </div>
-            <div class="col-xs-12 col-md-10">
+            <div class="col-xs-12 col-md-10" style="margin: 0px;padding: 0px;">
                 {% for article in articles %}
                     <div class="list-group">
                         <a class="list-group-item active" target="_blank" href="{{ article.get_absolute_url }}">
@@ -26,7 +26,7 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="col-xs-12 col-md-1">
+            <div class="col-xs-12 col-md-1" style="margin: 0px;padding: 0px;">
             </div>
         </div>
 

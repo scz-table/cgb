@@ -1,0 +1,26 @@
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+    </style>
+
+    <table class="form-group" style="margin: 0 auto">
+        <tr>
+            <td>
+                <input id="search_data" type="text" class="form-control" placeholder="请输入要筛选的数据！">
+            </td>
+            <td>
+                <button type="submit" onclick="search_for_supplier()" class="btn btn-default">搜索</button>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+    function search_for_supplier(){
+        search_data_value=$("#search_data").val();
+        new_url="?global="+search_data_value;
+        var search_list =$("#{{ search_list }}", parent.document);
+        search_list.attr('src',search_list.attr('src').split("?",1)+new_url);
+    }
+    </script>

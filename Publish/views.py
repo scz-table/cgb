@@ -73,10 +73,12 @@ def rename_article_column(request):
 @csrf_exempt
 def del_article_column(request):
     column_id = request.POST.get('column_id')
-    print(column_id)
+    # print(column_id)
+    if PublishArticle.objects.filter(column=column_id):
+        return HttpResponse("3")
     try:
         line = ArticleColumn.objects.get(pk=column_id)
-        print(line)
+        # print(line)
         line.delete()
         return HttpResponse("1")
     except:
@@ -159,7 +161,7 @@ def redit_article(request, article_id):
         article = PublishArticle.objects.get(id=article_id)
         this_article_form = PublishArticleForm(initial={"title":article.title})
         this_article_column = article.column
-        print('1')
+        # print('1')
         return render(request, "Publish/column/redit_article.html", {"article":article, "article_columns":article_columns, "this_article_column":this_article_column, "this_article_form":this_article_form})
     else:
         redit_article = PublishArticle.objects.get(id=article_id)

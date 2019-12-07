@@ -5,7 +5,9 @@ app_name='publish'
 urlpatterns = [
     path('',views.TitleView,name='title'),
     path('article_list',views.article_list,name='article_list'),
-    path('list_search',TemplateView.as_view(template_name='Supplier/SupplierSearch.html'),name='list_search'),
+    path('title_search',TemplateView.as_view(template_name='Publish/search/Article_title_Search.html'),name='title_search'),
+    path('list_search',TemplateView.as_view(template_name='Publish/search/Article_list_Search.html'),name='list_search'),
+    path('column_search',TemplateView.as_view(template_name='Publish/search/Article_column_Search.html'),name='column_search'),
 
 
     path('article_post',views.article_post,name='article_post'),

@@ -22,7 +22,7 @@
                 {% endwith %}
             </td>
             <td>
-                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item1"id="item1" placeholder="请输入要筛选的数据！">
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item1" id="item1" placeholder="请输入要筛选的数据！">
             </td>
             <td>
                 {% with and_or_name='and_or2' and_or_id='id_and_or2' %}
@@ -35,7 +35,7 @@
                 {% endwith %}
             </td>
             <td>
-                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item2"id="item2" placeholder="请输入要筛选的数据！">
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item2" id="item2" placeholder="请输入要筛选的数据！">
             </td>
         </tr>
         <tr>
@@ -50,7 +50,7 @@
                 {% endwith %}
             </td>
             <td>
-                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item3"id="item3" placeholder="请输入要筛选的数据！">
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item3" id="item3" placeholder="请输入要筛选的数据！">
             </td>
             <td>
                 {% with and_or_name='and_or4' and_or_id='id_and_or4' %}
@@ -63,7 +63,7 @@
                 {% endwith %}
             </td>
             <td>
-                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item4"id="item4" placeholder="请输入要筛选的数据！">
+                <input style="padding: 0px;height: 23px;font-size: 12px" type="text" class="form-control" name="item4" id="item4" placeholder="请输入要筛选的数据！">
             </td>
         </tr>
         <tr>
@@ -124,7 +124,7 @@
         {#alert(window.parent.document.getElementById('Supplier_front_iframe_list'));#}
         var supplier_list =$("#Supplier_front_iframe_list", parent.document);
         supplier_list.attr('src',supplier_list.attr('src').split("?",1)+new_url);
-        console.log(supplier_list.attr('src'));
+        {#console.log(supplier_list.attr('src'));#}
 
     }
     </script>

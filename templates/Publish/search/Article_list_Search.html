@@ -1,0 +1,26 @@
+{% extends 'Base/base.html' %}
+{% block body_base %}
+    <table class="form-group" style="margin: 0 auto">
+        <tr>
+            <td>
+                <button id= "add_column" onclick="add_column_button()" class="btn btn-primary">添加文章</button>
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+                <h3>文章列表</h3>
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+                {% with 'Article_list_front_iframe_list' as search_list %}
+                    {% include 'Tips/global_search.html' %}
+                {% endwith %}
+            </td>
+        </tr>
+    </table>
+    <script>
+
+    function add_column_button(){
+        parent.$('#Article_publish_front').trigger('click');
+    }
+    </script>
+{% endblock%}

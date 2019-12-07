@@ -1,0 +1,62 @@
+{% extends 'Base/base.html' %}
+{% block body_base %}
+    <table class="form-group" style="margin: 0 auto">
+        <tr>
+            <td>
+                <button id= "add_column" onclick="add_column_button()" class="btn btn-primary">增加文章分类</button>
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+                <h3>文章分类</h3>
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+                {% with 'Article_column_front_iframe_list' as search_list %}
+                    {% include 'Tips/global_search.html' %}
+                {% endwith %}
+            </td>
+        </tr>
+    </table>
+    <script>
+
+    function add_column_button(){
+        var index = parent.layer.open({
+            type: 1,
+            skin: "layui-layer-rim",
+            area: ["400px", "260px"],
+            offset:"100px",
+            title: "新增文章分类",
+            content: '<div class="text-center" style="margin-top:20px">\
+                <p> 请输入新的文章分类名称</p>\
+                    <p><input type="text" name="column" maxlength="200" required="" id="id_column"></p>\
+                <p> 请输入新的文章分类的备注信息</p>\
+                    <p><input type="text" name="notes" id="id_notes"></p>\
+</div > ',
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                column_name = parent.$('#id_column').val();
+                notes_name = parent.$('#id_notes').val();
+                $.ajax({
+                    url: '{% url "publish:article-column" %}',
+                    type: 'POST',
+                    data: { "column": column_name,"notes": notes_name },
+                    success: function (e) {
+                        if (e == "1") {
+                            parent.layer.msg('新增文章分类{' + column_name + '}成功！', {offset:'100px',});
+                            parent.layer.close(index);
+                            setTimeout(function (){window.parent.document.getElementById('Article_column_front_iframe_list').contentWindow.location.reload()},800);
+                        } else if(e=="2"){
+                            parent.layer.msg('此文章分类{' + column_name + '}已有，请更换名称。', {offset:'185px',})
+                        }else{
+                            parent.layer.msg("新的文章分类{" + column_name + "}没有保存,修改失败。", {offset:'185px',})
+                        }
+                    },
+                });
+            },
+            btn2: function (index, layero) {
+                parent.layer.close(index);
+            }
+        });
+    }
+    </script>
+{% endblock%}
