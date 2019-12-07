@@ -4,21 +4,41 @@
 {#<link rel="stylesheet" href="{% static 'editor/css/style.css' %}"> #}
 <link rel="stylesheet" href="{% static 'editor/css/editormd.css' %}">
 
-<div style="margin-left:10px">
-    <form class="form-horizontal" action="." method="post">{% csrf_token %} 
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-2 text-right"><span>标题:</span></div>
-            <div class="col-md-10 text-left">{{article_post_form.title}}</div> 
-        </div>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-2 text-right"><span>文章分类:</span></div>
-            <div class="col-md-10 text-left">
-                <select id="which_column">
-                    {% for column in article_columns %}
-                    <option value="{{column.id}}">{{column.column}}</option> 
-                    {% endfor %}
-                </select> 
+<div style="width: 97%;margin-left: 10px;">
+    <form class="form-horizontal" action="." method="post">{% csrf_token %}
+
+        <div class="row">
+            <div class="col-md-2"><input type="button" class="btn btn-primary btn-lg" value="发布" onclick="publish_article()"></div>
+            <div class="col-md-9">
+                <table>
+                    <tr>
+                        <td>
+                            <label style="margin: 0px" class="control-label" for="">标题:</label>
+                        </td>
+                        <td>
+                            {{article_post_form.title}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="margin: 0px" class="control-label" for="">文章分类:</label>
+                        </td>
+                        <td>
+                            <select id="which_column" name="column" class="form-control">
+                                {% for column in article_columns %}
+                                    <option value="{{column.id}}">{{column.column}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="margin: 0px" class="control-label" for="">内容:</label>
+                        </td>
+                    </tr>
+                </table>
             </div>
+            <div class="col-md-1"><input type="button" class="btn btn-primary btn-lg" value="发布" onclick="publish_article()"></div>
         </div>
 {#        <div class="row" style="margin-top: 10px;">#}
 {#            <div class="col-md-2 text-right"><span>文章标签:</span></div> #}
@@ -32,15 +52,13 @@
 {#                {% endfor %}    #}
 {#            </div>#}
 {#        </div>#}
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-2 text-right"><span>内容:</span></div>
             <!--div class="col-md-10 text-left">{{article_post_form.body}}</div-->
-            <div id="editormd" class="col-md-10 text-left">
+            <div id="editormd" class="text-left">
                 <textarea style="display:none;" id="id_body"></textarea>
-            </div> 
-        </div>
+            </div>
         <div class="row">
-            <input type="button" class="btn btn-primary btn-lg" value="发布" onclick="publish_article()">
+            <div class="col-md-2"><input type="button" class="btn btn-primary btn-lg" value="发布" onclick="publish_article()"></div>
+            <div class="col-md-10  text-right"><input type="button" class="btn btn-primary btn-lg" value="发布" onclick="publish_article()"></div>
         </div>
     </form>
 </div>
@@ -59,15 +77,14 @@ function publish_article(){
         data: {"title":title, "body":body, "column_id":column_id},
         success: function(e){
             if(e=="1"){ 
-                layer.msg("发布成功！");
+                parent.layer.msg("添加成功！");
                 {#location.href = "{% url 'publish:article_list' %}";#}
-                {#location.href = location.href;#}
-                setTimeout(function (){window.location.href = location.href;},800);
-                setTimeout(function (){window.location.href = "databases.html";},800);
+                window.parent.$('#Article_list_front_iframe_list').attr('src', window.parent.$('#Article_list_front_iframe_list').attr('src'));
+                window.parent.remove_table_iframe("#Article_publish_front_lable_li","#Article_publish_front_iframe");
             }else if(e=="2"){
-                layer.msg("sorry.") ;
+                parent.layer.msg("保存过程出错！") ;
             }else{ 
-                layer.msg("项目名称必须写，不能空。");
+                parent.layer.msg("保存内容错误，格式错误或者有空项。");
             } 
         },
     }); 

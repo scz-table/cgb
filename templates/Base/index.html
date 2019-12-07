@@ -135,16 +135,13 @@
     }
     //remove_table_iframe('#Supplier_front_lable_li','#Supplier_front_iframe');
     function remove_table_iframe(table_lable,table_iframe){
-        {#if ($(table_lable).hasClass("active")){#}
 
         $(table_lable).siblings().removeClass("active");
         $(table_iframe).siblings().removeClass("active");
 
         $(table_lable).prev().addClass("active");
         $(table_iframe).prev().addClass("active");
-        {#}#}
-        {#  $(table_lable).prev().addClass("active");#}
-        {#  $(table_iframe).prev().addClass("active");#}
+
         $(table_lable).remove();
         $(table_iframe).remove();
     }

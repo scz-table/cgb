@@ -117,6 +117,7 @@ def article_post(request):
             except:
                 return HttpResponse("2")
         else:
+            print(article_post_form.errors.get_json_data())
             return HttpResponse("3")
     else:
         article_post_form = PublishArticleForm()

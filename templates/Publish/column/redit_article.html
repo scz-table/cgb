@@ -5,40 +5,54 @@
 <link rel="stylesheet" href="{% static 'editor/css/editormd.css' %}"> 
 {#<div class="container">#}
 {#<div class="col-md-10">#}
-<div style="margin-left:10px">
+<div style="width: 97%;margin-left: 10px;">
     <form class="form-horizontal" action="." method="post">{% csrf_token %}
         <div class="row">
-            <input type="button" class="btn btn-primary btn-lg" value="发布" onclick="redit_article()">
-        </div>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-2 text-right"><span>标题:</span></div>
-            <div class="col-md-10 text-left">{{this_article_form.title}}</div>
-        </div>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-2 text-right"><span>栏目:</span></div>
-            <div class="col-md-10 text-left">
-                <select id="which_column">
-                    {% for column in article_columns %}
-                        {% if column == this_article_column.column %}
-                            <option value="{{column.id}}" selected="selected">{{column.column}} </option>
-                        {% else %}
-                            <option value="{{column.id}}">{{column.column}}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
+            <div class="col-md-2"><input type="button" class="btn btn-primary btn-lg" value="发布" onclick="redit_article()"></div>
+            <div class="col-md-9">
+                <table>
+                    <tr>
+                        <td>
+                            <label style="margin: 0px" class="control-label" for="">标题:</label>
+                        </td>
+                        <td>
+                            {{this_article_form.title}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="margin: 0px" class="control-label" for="">文章分类:</label>
+                        </td>
+                        <td>
+                            <select id="which_column" class="form-control">
+                                {% for column in article_columns %}
+                                    {% if column == this_article_column %}
+                                        <option value="{{column.id}}" selected="selected">{{column.column}} </option>
+                                    {% else %}
+                                        <option value="{{column.id}}">{{column.column}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="margin: 0px" class="control-label" for="">内容:</label>
+                        </td>
+                    </tr>
+                </table>
             </div>
+            <div class="col-md-1"><input type="button" class="btn btn-primary btn-lg" value="发布" onclick="redit_article()"></div>
         </div>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-2 text-right"><span>内容:</span></div>
-            <div id="editormd" class="col-md-10 text-left">
+            <div id="editormd" class="text-left">
         <!--{{article_post_form.body}}-->
                 <textarea style="display:none;" id="id_body">
 {{article.body}}
                 </textarea>
             </div>
-        </div>
         <div class="row">
-            <input type="button" class="btn btn-primary btn-lg" value="发布" onclick="redit_article()">
+            <div class="col-md-2"><input type="button" class="btn btn-primary btn-lg" value="发布" onclick="redit_article()"></div>
+            <div class="col-md-10  text-right"><input type="button" class="btn btn-primary btn-lg" value="发布" onclick="redit_article()"></div>
         </div>
     </form>
 </div>
@@ -68,6 +82,7 @@ function redit_article(){
             if(e=="1"){ 
                 parent.layer.msg("修改成功！");
                 {#location.href = "{% url 'publish:article_list' %}";#}
+                window.parent.$('#Article_list_front_iframe_list').attr('src', window.parent.$('#Article_list_front_iframe_list').attr('src'));
                 window.parent.remove_table_iframe("#Article_redit_front_lable_li","#Article_redit_front_iframe");
             }else{
                 parent.layer.msg("修改失败！");
